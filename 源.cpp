@@ -2,14 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-void word()
+void word(char* name)
 {
     FILE* fp;
-    char name[100] = { 0 };//存储路径名
     int ch;
     int total = 0;
-
-    scanf("%s", name);
 
     if ((fp = fopen(name, "r")) == NULL)
     {
@@ -23,13 +20,12 @@ void word()
     printf("字符数:%d", total);
 }
 
-void words()
+void words(char* name)
 {
     int count = 0;
     int flag = 0;//标志位，遇到空格逗号就置为0
     int ch;
-    char name[100] = { 0 };//存储路径名
-    scanf("%s", name);
+   
     FILE* fp = fopen(name, "r");
     while ((ch = fgetc(fp)) != EOF)
     {
@@ -47,20 +43,16 @@ void words()
     printf("单词数:%d", count);
 
 }
-int main()
+int main(int argc,char* argv[])
 {
-    char in[5] = { 0 };
-    char chs_c[5] = "-c";
-    char chs_w[5] = "-w";
-
-    scanf("%s", in);
-    if (0 == strcmp(in, chs_c))
+    
+    if (!strcmp(argv[1],"-c"))
     {
-        word();
+        word(argv[2]);
     }
-    if (0 == strcmp(in, chs_w))
+    if (!strcmp(argv[1], "-w"))
     {
-        words();
+        words(argv[2]);
     }
     return 0;
 }
